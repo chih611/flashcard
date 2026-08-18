@@ -1,0 +1,100 @@
+.app-container {
+    max-width: 700px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 0 16px;
+}
+
+/* Card Outer Wrapper */
+.card-container {
+    width: 380px;
+    min-height: 280px;
+    /* Sets a base size, but expands when content grows */
+    height: auto;
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Front & Back Faces */
+.card-face {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+    /* Prevents scrollbars from appearing */
+}
+
+.empty-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Button Base & Variants */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #374151;
+    color: white;
+}
+
+.btn-audio {
+    font-size: 28px;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #374151;
+    color: white;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Controls & Checkbox Layouts */
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
