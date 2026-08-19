@@ -14,9 +14,6 @@ export const PrepositionFilter = ({ cards, selectedPrep, onSelectPrep }) => {
 
     return (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <label htmlFor="prep-filter" style={{ fontWeight: "bold", fontSize: "0.9rem" }}>
-                Filter Preposition:
-            </label>
             <select
                 id="prep-filter"
                 value={selectedPrep}

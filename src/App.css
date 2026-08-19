@@ -87,3 +87,44 @@ body,
     margin: 4px 0;
     position: relative;
 }
+
+/* Single row wrapper for all filter dropdowns */
+.filters-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Make each filter container grow equally */
+.filters-row>* {
+    flex: 1;
+    min-width: 0;
+    /* Prevents overflow inside flexbox */
+}
+
+/* Compact select inputs to fit mobile screens cleanly */
+.filters-row select {
+    width: 100%;
+    height: 34px;
+    padding: 2px 4px;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-overflow: ellipsis;
+    /* Truncates long text with '...' */
+    white-space: nowrap;
+}
+
+/* Compact labels if your filter components include text labels */
+.filters-row label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7rem;
+    font-weight: 600;
+    gap: 2px;
+}

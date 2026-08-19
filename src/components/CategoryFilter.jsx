@@ -4,21 +4,23 @@ export default function CategoryFilter({
     onCategoryChange,
 }) {
     return (
-        <div style={{ marginBottom: "20px" }}>
-            <label
-                style={{
-                    marginRight: "10px",
-                    fontWeight: "bold",
-                }}
-            >
-                Category:
-            </label>
+        <div>
 
             <select
                 value={selectedCategory}
                 onChange={(e) =>
                     onCategoryChange(e.target.value)
                 }
+                style={{
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    border: "1px solid #ccc",
+                    outline: "none",
+                    fontSize: "0.9rem",
+                    cursor: "pointer",
+                    backgroundColor: "#fff",
+                    color: "#333",
+                }}
             >
                 {categories.map((category) => (
                     <option

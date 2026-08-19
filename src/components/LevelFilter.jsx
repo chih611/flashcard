@@ -14,9 +14,6 @@ export const LevelFilter = ({ cards, selectedLevel, onSelectLevel }) => {
 
     return (
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <label htmlFor="level-filter" style={{ fontWeight: "bold", fontSize: "0.9rem" }}>
-                Filter Level:
-            </label>
             <select
                 id="level-filter"
                 value={selectedLevel}

@@ -23,7 +23,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [shuffleMode, setShuffleMode] = useState(false);
 
-  const categories = ["All", ...new Set(cards.map((c) => c.category))];
+  const categories = ["All Categories", ...new Set(cards.map((c) => c.category))];
 
   const [selectedPrep, setSelectedPrep] = useState("ALL");
   const [selectedLevel, setSelectedLevel] = useState("ALL");
@@ -166,14 +166,6 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>Flash Card App</h1>
-
-      <CategoryFilter
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
-      />
-
       <Progress
         currentIndex={currentIndex}
         totalCards={filteredCards.length}
@@ -207,16 +199,24 @@ function App() {
           flexWrap: "wrap", // Tự động xuống hàng nếu màn hình điện thoại quá nhỏ
         }}
       >
-        <PrepositionFilter
-          cards={cards}
-          selectedPrep={selectedPrep}
-          onSelectPrep={setSelectedPrep}
-        />
-        <LevelFilter
-          cards={cards}
-          selectedLevel={selectedLevel}
-          onSelectLevel={setSelectedLevel}
-        />
+        <div className="filters-row">
+          <CategoryFilter
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
+          <PrepositionFilter
+            cards={cards}
+            selectedPrep={selectedPrep}
+            onSelectPrep={setSelectedPrep}
+          />
+          <LevelFilter
+            cards={cards}
+            selectedLevel={selectedLevel}
+            onSelectLevel={setSelectedLevel}
+          />
+        </div>
+
         <div>Showing {filteredCards.length} cards</div>
       </div>
 
