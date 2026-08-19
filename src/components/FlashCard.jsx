@@ -20,34 +20,47 @@ export default function FlashCard({
             style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px",
+                justifyContent: "center",
+                gap: "6px",
                 textAlign: "center",
                 position: "relative",
-                padding: "20px 16px",
+                padding: "12px 14px",
                 boxSizing: "border-box",
                 width: "100%",
+                height: "100%",
+                overflowY: "auto", // Soft internal scroll if text overflows
             }}
         >
             {/* Level Badge */}
-            {level && (
-                <span
-                    style={{
-                        alignSelf: "center",
-                        fontSize: "0.75rem",
-                        fontWeight: "bold",
-                        padding: "2px 8px",
-                        borderRadius: "12px",
-                        backgroundColor: isBack ? "rgba(255, 255, 255, 0.2)" : "#e0e0e0",
-                        color: isBack ? "#fff" : "#333",
-                        textTransform: "uppercase",
-                    }}
-                >
-                    {level}
-                </span>
-            )}
+            {
+                level && (
+                    <span
+                        style={{
+                            alignSelf: "center",
+                            fontSize: "0.7rem",
+                            fontWeight: "bold",
+                            padding: "2px 8px",
+                            borderRadius: "12px",
+                            backgroundColor: isBack ? "rgba(255, 255, 255, 0.2)" : "#e0e0e0",
+                            color: isBack ? "#fff" : "#333",
+                            textTransform: "uppercase",
+                            flexShrink: 0,
+                        }}
+                    >
+                        {level}
+                    </span>
+                )
+            }
 
             {/* Primary Text */}
-            <div style={{ fontSize: isMeaning ? "1.1rem" : "1.35rem", fontWeight: "bold", lineHeight: "1.4" }}>
+            <div
+                style={{
+                    fontSize: isMeaning ? "1.05rem" : "1.25rem",
+                    fontWeight: "bold",
+                    lineHeight: "1.3",
+                    flexShrink: 0,
+                }}
+            >
                 {primary}
             </div>
 
@@ -55,11 +68,12 @@ export default function FlashCard({
             <div
                 style={
                     isMeaning
-                        ? { fontSize: "1rem", opacity: 0.9 }
+                        ? { fontSize: "0.9rem", opacity: 0.9, flexShrink: 0 }
                         : {
-                            fontSize: "0.85rem",
+                            fontSize: "0.8rem",
                             color: isBack ? "rgba(255, 255, 255, 0.85)" : "#666",
                             fontWeight: "bold",
+                            flexShrink: 0,
                         }
                 }
             >
@@ -67,51 +81,57 @@ export default function FlashCard({
             </div>
 
             {/* Preposition */}
-            {prep && (
-                <div
-                    style={{
-                        fontSize: "0.85rem",
-                        fontStyle: "italic",
-                        color: isBack ? "rgba(255, 255, 255, 0.75)" : "#888",
-                    }}
-                >
-                    + prep: {prep}
-                </div>
-            )}
+            {
+                prep && (
+                    <div
+                        style={{
+                            fontSize: "0.8rem",
+                            fontStyle: "italic",
+                            color: isBack ? "rgba(255, 255, 255, 0.75)" : "#888",
+                            flexShrink: 0,
+                        }}
+                    >
+                        + prep: {prep}
+                    </div>
+                )
+            }
 
             {/* Examples Container */}
-            {(example || example2) && (
-                <div
-                    style={{
-                        marginTop: "6px",
-                        padding: "10px 12px",
-                        borderRadius: "6px",
-                        fontSize: "0.825rem",
-                        fontStyle: "italic",
-                        backgroundColor: isBack ? "rgba(255, 255, 255, 0.15)" : "#f5f5f5",
-                        color: isBack ? "#fff" : "#444",
-                        borderLeft: isBack ? "3px solid #fff" : "3px solid #007bff",
-                        textAlign: "left",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "6px",
-                        lineHeight: "1.35",
-                    }}
-                >
-                    {example && (
-                        <div>
-                            <strong>Ex 1:</strong> "{example}"
-                        </div>
-                    )}
-                    {example2 && (
-                        <div>
-                            <strong>Ex 2:</strong> "{example2}"
-                        </div>
-                    )}
-                </div>
-            )}
-        </div>
+            {
+                (example || example2) && (
+                    <div
+                        style={{
+                            marginTop: "4px",
+                            padding: "8px 10px",
+                            borderRadius: "6px",
+                            fontSize: "0.78rem",
+                            fontStyle: "italic",
+                            backgroundColor: isBack ? "rgba(255, 255, 255, 0.15)" : "#f5f5f5",
+                            color: isBack ? "#fff" : "#444",
+                            borderLeft: isBack ? "3px solid #fff" : "3px solid #007bff",
+                            textAlign: "left",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "4px",
+                            lineHeight: "1.3",
+                        }}
+                    >
+                        {example && (
+                            <div>
+                                <strong>Ex 1:</strong> "{example}"
+                            </div>
+                        )}
+                        {example2 && (
+                            <div>
+                                <strong>Ex 2:</strong> "{example2}"
+                            </div>
+                        )}
+                    </div>
+                )
+            }
+        </div >
     );
+
     const frontText = isReverseMode
         ? renderSide(
             card.explain || card.meaning,
@@ -154,8 +174,8 @@ export default function FlashCard({
         <div
             style={{
                 perspective: "1000px",
-                height: "250px",
-                marginBottom: "60px",
+                width: "100%",
+                height: "100%",
             }}
         >
             <motion.div
@@ -180,6 +200,8 @@ export default function FlashCard({
                 <div
                     style={{
                         position: "absolute",
+                        top: 0,
+                        left: 0,
                         width: "100%",
                         height: "100%",
                         backfaceVisibility: "hidden",
@@ -189,8 +211,7 @@ export default function FlashCard({
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        fontSize: "24px",
-                        padding: "20px",
+                        boxSizing: "border-box",
                     }}
                 >
                     {frontText}
@@ -199,6 +220,9 @@ export default function FlashCard({
                 {/* Back Side */}
                 <div
                     style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
                         width: "100%",
                         height: "100%",
                         transform: "rotateY(180deg)",
@@ -210,13 +234,12 @@ export default function FlashCard({
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        fontSize: "24px",
-                        padding: "20px",
+                        boxSizing: "border-box",
                     }}
                 >
                     {backText}
-                </div>
-            </motion.div>
-        </div>
+                </div >
+            </motion.div >
+        </div >
     );
 }

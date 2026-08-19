@@ -1,79 +1,89 @@
-/* Mobile-First Base Styles (Default for screens under 600px) */
+/* Reset and lock body to dynamic mobile viewport height */
+html,
+body,
+#root {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Blocks full-page scrolling */
+    box-sizing: border-box;
+}
+
+/* Root App Container for iPhone 16 */
 .app-container {
     width: 100%;
-    max-width: 480px;
-    /* Constrain max width on smaller screens */
-    min-height: 100vh;
+    max-width: 430px;
+    /* Comfortably fits iPhone 16 / 16 Pro width */
+    height: 100dvh;
     margin: 0 auto;
-    padding: 12px;
+    padding: 12px 14px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
+    gap: 6px;
 }
 
-/* Touch-Friendly Buttons & Inputs */
-button,
-select {
-    min-height: 44px;
-    /* Minimum recommended touch target height */
-    font-size: 1rem;
-    border-radius: 8px;
-    touch-action: manipulation;
-    /* Eliminates tap delay on mobile devices */
+/* Compact Title & Header Elements */
+.app-container h1 {
+    font-size: 1.25rem;
+    margin: 0;
+    text-align: center;
 }
 
+/* Controls & Buttons Compression */
 .controls-container {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    gap: 6px;
 }
 
 .button-group {
     display: flex;
+    gap: 6px;
     width: 100%;
-    gap: 8px;
-    flex-wrap: wrap;
 }
 
-.button-group button {
-    flex: 1 1 calc(50% - 8px);
-    /* 2 buttons per row on mobile */
+.button-group .btn {
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    min-height: 36px;
+    border-radius: 6px;
 }
 
 .checkbox-group {
     display: flex;
-    gap: 16px;
-    align-items: center;
+    gap: 12px;
     justify-content: center;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
 }
 
-/* Responsive Card Container */
+/* Compact Filter Row */
+.filter-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.8rem;
+}
+
+.filter-row select {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    height: 32px;
+    border-radius: 6px;
+}
+
+/* FlashCard Wrapper - Grows dynamically to fill remaining height */
 .card-container {
+    flex: 1;
+    /* Takes all unused vertical screen space */
+    min-height: 0;
+    /* Prevents flex child from overflowing screen boundary */
     width: 100%;
-    max-width: 360px;
-    min-height: 260px;
-    margin: 12px 0;
-    border-radius: 12px;
-}
-
-/* Tablet & Desktop Scaling (Screen size > 600px) */
-@media (min-width: 600px) {
-    .app-container {
-        max-width: 600px;
-        padding: 24px;
-    }
-
-    .button-group button {
-        flex: 1;
-        /* Distribute buttons evenly in a single row on desktop */
-    }
-
-    .card-container {
-        min-height: 320px;
-    }
+    margin: 4px 0;
+    position: relative;
 }
