@@ -27,6 +27,7 @@ function App() {
 
   const [selectedPrep, setSelectedPrep] = useState("ALL");
   const [selectedLevel, setSelectedLevel] = useState("ALL");
+  const [selectedPreps, setSelectedPreps] = useState([]);
 
   const getInitialMarked = () => {
     try {
@@ -58,31 +59,36 @@ function App() {
   // Kết hợp lọc theo cả Preposition lẫn Level
   const filteredCards = useMemo(() => {
     return cards.filter((card) => {
-      // Điều kiện 1: Filter "Show Marked Only"
       if (showMarkedOnly && !markedIds.includes(card.id)) {
         return false;
       }
 
-      // Điều kiện 2: Filter Preposition
-      const matchesPrep =
-        selectedPrep === "ALL"
-          ? true
-          : selectedPrep === "NONE"
-            ? !card.preposition
-            : card.preposition
-              ?.split(",")
-              .map((p) => p.trim())
-              .includes(selectedPrep);
+      // Preposition Multi-select Matching Logic
+      let matchesPrep = true;
+      if (selectedPreps.length > 0) {
+        const cardPreps = card.preposition
+          ? card.preposition.split(",").map((p) => p.trim())
+          : [];
 
-      // Điều kiện 3: Filter Level
+        matchesPrep = selectedPreps.some((selected) => {
+          if (selected === "NONE") {
+            return !card.preposition || cardPreps.length === 0;
+          }
+          return cardPreps.includes(selected);
+        });
+      }
+
+      // Level Filter
       const matchesLevel =
         selectedLevel === "ALL"
           ? true
-          : card.level?.toUpperCase().trim() === selectedLevel;
+          : selectedLevel === "NONE"
+            ? !card.level
+            : card.level?.toUpperCase().trim() === selectedLevel;
 
       return matchesPrep && matchesLevel;
     });
-  }, [cards, markedIds, showMarkedOnly, selectedPrep, selectedLevel]);
+  }, [cards, markedIds, showMarkedOnly, selectedPreps, selectedLevel]);
   const currentCard = filteredCards[currentIndex];
 
   const handleNext = () => {
@@ -205,19 +211,17 @@ function App() {
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
           />
-          <PrepositionFilter
-            cards={cards}
-            selectedPrep={selectedPrep}
-            onSelectPrep={setSelectedPrep}
-          />
           <LevelFilter
             cards={cards}
             selectedLevel={selectedLevel}
             onSelectLevel={setSelectedLevel}
           />
         </div>
-
-        <div>Showing {filteredCards.length} cards</div>
+        <PrepositionFilter
+          cards={cards}
+          selectedPreps={selectedPreps}
+          onSelectPreps={setSelectedPreps}
+        />
       </div>
 
       <FlashCard
